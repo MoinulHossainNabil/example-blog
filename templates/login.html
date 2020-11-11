@@ -14,18 +14,21 @@
     <!-- Content Row -->
     <div class="row">
       <div class="col-lg-4 mb-4">
-        <form name="sentMessage" id="contactForm" novalidate>
+        <form method="post" name="sentMessage" id="contactForm">
+          {% csrf_token %}
           <div class="control-group form-group">
             <div class="controls">
               <label>Email*</label>
-              <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email.">
+              {{form.email}}
+              <!-- <input type="email" class="form-control" id="email" required data-validation-required-message="Please enter your email."> -->
               <p class="help-block"></p>
             </div>
           </div>
           <div class="control-group form-group">
             <div class="controls">
               <label>Password*</label>
-              <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password.">
+              {{form.password}}
+              <!-- <input type="password" class="form-control" id="password" required data-validation-required-message="Please enter your password."> -->
             </div>
           </div>
           <div id="success"></div>
