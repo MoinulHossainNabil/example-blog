@@ -22,6 +22,7 @@ def login_user(request):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, "Successfully Logged in !!")
             return redirect('/')
         else:
             messages.warning(request, "Username or Password Incorrect !!")

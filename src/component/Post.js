@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Posts = ({post}) => {
+const Posts = ({post, endpoint}) => {
   const { user_id, id, title, body } = post;
   return (
     
@@ -18,10 +18,10 @@ const Posts = ({post}) => {
               </div>
               <div className="col-md-6 text-left">
                 <h3 className="mr-auto">{title.slice(0, 10)}</h3>
-                <p className="lead card-text text-justify mr-auto">{body}</p>
+                <p className="lead card-text text-justify mr-auto">{body.length < 100 ?body:body.slice(0, 100)}</p>
                 <Link
                   className="btn btn-primary text-decoration-none mr-auto"
-                  to={`/${id}`}
+                  to={`${endpoint}${id}`}
                   role="button"
                 >
                   Read More

@@ -4,13 +4,12 @@ import { Context } from "../ContextApi";
 const Home = () => {
   const context = useContext(Context);
   const posts = context.posts.map((post) => {
-      return <Post post={post} key={post.id} />
+      return <Post post={post} endpoint="/post/" key={post.id} />
   })
-
+  
   return (
-      <div className="container">
-          {posts}
-      </div>
+      context.loading?<div>Loading</div>
+      :posts
   )
 };
 

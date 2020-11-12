@@ -1,10 +1,9 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.views.decorators.csrf import csrf_exempt
+from django.urls import path
 
 from rest_framework_simplejwt import views as jwt_views
 
-from .views import UserRegisterView, LoginViewSimpleJWT, GetUsers
+from .views import (UserRegisterView, LoginViewSimpleJWT,
+                    GetUsers, GetPosts, GetPostComment, CreatePost, GetSinglePost)
 
 app_name = 'rest_api_app'
 
@@ -13,5 +12,9 @@ urlpatterns = [
     path('login/', LoginViewSimpleJWT.as_view(), name='token_obtain_pair'),
     path('refresh_token/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('get_users/', GetUsers.as_view(), name='get_user_api'),
+    path('get_posts/', GetPosts.as_view()),
+    path('get_single_post/<int:pk>/', GetSinglePost.as_view()),
+    path('get_post_comments/<int:post_id>/', GetPostComment.as_view()),
+    path('create_post/', CreatePost.as_view()),
 ]
 

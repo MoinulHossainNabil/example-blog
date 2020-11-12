@@ -1,13 +1,17 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from django.http import JsonResponse
+
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.parsers import FormParser, JSONParser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView
+
 from authentication.models import User
-from .serializers import UserSerializer
+from posts.models import Post, Comment
+from .serializers import UserSerializer, PostSerializer, CommentSerializer, CreatePostSerializer
 
 
 class MyTokenObtainSerilizer(TokenObtainPairSerializer):
@@ -21,9 +25,9 @@ class MyTokenObtainSerilizer(TokenObtainPairSerializer):
 
         # Customize response dictionary with extra data
         data['email'] = self.user.email
-        data['user_id'] = self.user.pk
-        data['message'] = "login successful"
-
+        data['user'] = self.user.pk
+        data['response'] = "login successful"
+        
         return data
 
 
@@ -41,19 +45,21 @@ class UserRegisterView(APIView):
     def post(self, request, *args, **kwargs):
         required_fields = ['email', 'first_name', 'last_name', 'password1', 'password2']
         post_data = dict(request.data)
+        print(post_data)
         
         # Check if any field is missing
         for field in required_fields:
             if field not in post_data:
-                return Response({"response": f"{field} must be set"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"response": f"{field} must be set"},
+                                status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
         email = User.objects.filter(email=post_data['email'])
         if email.exists():
-            return Response({"response": "email already exists"}, status=status.HTTP_400_BAD_REQUEST)
-        first_name = post_data['first_name']
-        last_name = post_data['last_name']
+            return Response({"response": "email already exists"},
+                            status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         if post_data['password1'] != post_data['password2']:
-            return Response({"response": "Passwords don't match"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"response": "Passwords don't match"},
+                            status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
         user = User.objects.create_user(
             email=post_data['email'],
@@ -76,3 +82,27 @@ class UserRegisterView(APIView):
 class GetUsers(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+class GetPosts(ListAPIView):
+    queryset = Post.objects.order_by('-id')
+    serializer_class = PostSerializer
+
+
+class GetPostComment(APIView):
+    def get(self, *args, **kwargs):
+        post_id = kwargs.get('post_id')
+        comments = Comment.objects.filter(post__id=post_id)
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+
+class GetSinglePost(RetrieveAPIView):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+
+
+class CreatePost(CreateAPIView):
+    permission_classes = (IsAuthenticated, )
+    serializer_class = CreatePostSerializer
+    queryset = Post.objects.all()
