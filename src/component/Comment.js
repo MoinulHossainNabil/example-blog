@@ -25,7 +25,7 @@ export default function Comment({ comments }) {
   return (
     <div className="row mt-2 justify-content-center">
       <div className="col-md-8 mt-4">
-        <h4 className="mb-4">Comments</h4>
+  <h4 className="mb-4" id="commentID">{comments.length}&nbsp;Comments</h4>
         {totalComments}
       </div>
     </div>

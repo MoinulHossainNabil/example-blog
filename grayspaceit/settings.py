@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Configuration for the django rest framework
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_PERMISSION_CLASSES': (
@@ -90,6 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'grayspaceit.wsgi.application'
 
+# Setting the AUTH_USER_MODEL to the custom User model in authentication app
 AUTH_USER_MODEL = 'authentication.User'
 
 LOGIN_URL = '/auth/login/'
@@ -150,6 +152,7 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [str(BASE_DIR / "static")]
 
+# Setting the origin whitelist to access django server from other server running on different port
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8000',
@@ -157,6 +160,7 @@ CORS_ORIGIN_WHITELIST = [
 
 # Token Configuration For JWT Authentication
 SIMPLE_JWT = {
+    # Generated access and refresh tokens will expire after 1 day. You can alter it by setting the days parameter
     'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,

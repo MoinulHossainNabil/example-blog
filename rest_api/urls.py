@@ -3,7 +3,7 @@ from django.urls import path
 from rest_framework_simplejwt import views as jwt_views
 
 from .views import (UserRegisterView, LoginViewSimpleJWT,
-                    GetUsers, GetPosts, GetPostComment, CreatePost, GetSinglePost)
+                    GetUsers, GetPosts, GetPostComment, CreatePost, GetSinglePost, PostComment)
 
 app_name = 'rest_api_app'
 
@@ -16,5 +16,6 @@ urlpatterns = [
     path('get_single_post/<int:pk>/', GetSinglePost.as_view()),
     path('get_post_comments/<int:post_id>/', GetPostComment.as_view()),
     path('create_post/', CreatePost.as_view()),
+    path('post_comment/', PostComment.as_view()),
 ]
 

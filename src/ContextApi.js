@@ -71,13 +71,16 @@ class ContextApi extends Component {
     }
     
     handleLogout = () => {
+        let messageHideFunction = this.hideMessage;
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         this.setState({
             token: "",
             user: "",
-            isUserLoggedIn: false
+            isUserLoggedIn: false,
+            message: "Logged out"
         })
+        setTimeout(messageHideFunction, 3000);
     }
 
     handleRegister = (event, data, history) => {

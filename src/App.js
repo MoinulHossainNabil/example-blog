@@ -2,7 +2,6 @@ import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
-import { BrowserRouter as Router } from "react-router-dom";
 import { Context } from "./ContextApi";
 import Navbar from "./component/Navbar";
 import Register from "./component/Register";

@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
 class CustomUserManager(BaseUserManager):
-
+    """Custom user model to authenticate with email address other than username"""
     def create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError("The Email Must Be Set")
@@ -30,7 +30,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, null=False)
-    first_name = models.CharField(ugettext_lazy('first name'), max_length=30, blank=True)
+    first_name = models.CharField(ugettext_lazy('first name'), max_length=150, blank=True)
     last_name = models.CharField(ugettext_lazy('last name'), max_length=150, blank=True)
     is_staff = models.BooleanField(
         ugettext_lazy('staff status'),
@@ -47,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(ugettext_lazy('date joined'), default=timezone.now)
 
+    """Have to set the username field email as django built-in user model set it to username by default"""
     USERNAME_FIELD = 'email'
     objects = CustomUserManager()
 

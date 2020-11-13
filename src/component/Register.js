@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {Link, Redirect} from 'react-router-dom';
 import {Context} from '../ContextApi';
+
 export default function Register({history}) {
     const context = useContext(Context);
     const [data, setData] = useState({
@@ -19,7 +20,7 @@ export default function Register({history}) {
             <h4>Register with a new account</h4>
         </div>
         <div className="col-12">
-            <p className="lead text-danger text-capitalize pt-2" id="register-error"></p>
+            <p className="lead text-danger font-weight-bold text-capitalize pt-2" id="register-error" style={{fontSize: "1.1rem"}}></p>
         </div>
       <div className="col-md-6 m-auto">
         <form onSubmit={(event) => context.register(event, data, history)}>

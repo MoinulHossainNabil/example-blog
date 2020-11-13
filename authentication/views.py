@@ -1,4 +1,3 @@
-from django.http import Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,12 +6,15 @@ from .forms import RegisterForm, LoginForm
 
 
 class CheckLogin:
+    """Check if the passed user is logged in"""
     @staticmethod
     def is_logged_in(user):
         return user.is_authenticated
 
 
 def login_user(request):
+    """Handler user login"""
+    # Return the user to the home page if already logged in
     if CheckLogin().is_logged_in(request.user):
         return redirect('/')
     form = LoginForm()
@@ -30,6 +32,8 @@ def login_user(request):
 
 
 def register(request):
+    """Handle register"""
+    # Return the user to home page if already logged in
     if CheckLogin().is_logged_in(request.user):
         return redirect('/')
     if request.method == "POST":
@@ -45,6 +49,7 @@ def register(request):
 
 @login_required
 def logout_user(request):
+    """Logs the user out"""
     logout(request)
     messages.success(request, "Logged out")
     return redirect('/auth/login/')

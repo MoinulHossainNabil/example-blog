@@ -29,7 +29,6 @@ export default function PostCreate({history}) {
           };
         axios.post(localhost + createUrl, postData, config)
         .then(response => {
-            console.log(response.data);
             history.push(`/user_posts/${response.data['id']}`);
         })
         .catch(error => {

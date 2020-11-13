@@ -16,10 +16,11 @@
             <div class="col-lg-4 mb-4">
                 <form method="post" name="sentMessage" id="contactForm">
                     {% csrf_token %}
+                    <!-- Iterate through the form to get the fields and its attributes-->
                     {% for field in form %}
                     <div class="control-group form-group">
                         <div class="controls">
-                            {{field.label_tag}}
+                            {{field.label_tag}}*
                             {{field}}
                             {% if field.help_text %}
                             <p class="help-block lead py-2">{{field.help_text}}</p>
@@ -36,7 +37,6 @@
                 </form>
             </div>
         </div>
-        <!-- /.row -->
 
     </div>
     <!-- /.container -->

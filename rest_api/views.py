@@ -1,7 +1,6 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import JsonResponse
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -32,9 +31,7 @@ class MyTokenObtainSerilizer(TokenObtainPairSerializer):
 
 
 class LoginViewSimpleJWT(TokenObtainPairView):
-    """ Generates token for the user to login"""
-    """ Call this view to by passing email and password in json format using post method
-        and we can then use the returned <access> token as Authorization Bearer Token passed in headers to login"""
+    """ Generates Authorization Bearer access token to authenticate the user"""
     serializer_class = MyTokenObtainSerilizer
 
 
@@ -45,8 +42,7 @@ class UserRegisterView(APIView):
     def post(self, request, *args, **kwargs):
         required_fields = ['email', 'first_name', 'last_name', 'password1', 'password2']
         post_data = dict(request.data)
-        print(post_data)
-        
+
         # Check if any field is missing
         for field in required_fields:
             if field not in post_data:
@@ -56,6 +52,9 @@ class UserRegisterView(APIView):
         email = User.objects.filter(email=post_data['email'])
         if email.exists():
             return Response({"response": "email already exists"},
+                            status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
+        if len(post_data['password1']) <= 6 or len(post_data['password2']) <=6:
+            return Response({"response": "Minimum lenght of password must be greater than 6"},
                             status=status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
         if post_data['password1'] != post_data['password2']:
             return Response({"response": "Passwords don't match"},
@@ -67,7 +66,7 @@ class UserRegisterView(APIView):
             last_name=post_data['last_name'],
             password=post_data['password1']
         )
-
+        # Response data to be passed
         new_user = {
             "response": "Your Registration Is Successful",
             "id": user.id,
@@ -85,24 +84,35 @@ class GetUsers(ListAPIView):
 
 
 class GetPosts(ListAPIView):
+    """Returns all of the posts from the database ordered by id descending"""
     queryset = Post.objects.order_by('-id')
     serializer_class = PostSerializer
 
 
 class GetPostComment(APIView):
+    """Returns the comments for a specific post"""
     def get(self, *args, **kwargs):
         post_id = kwargs.get('post_id')
-        comments = Comment.objects.filter(post__id=post_id)
+        comments = Comment.objects.filter(post__id=post_id).order_by('-date')
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
 
 class GetSinglePost(RetrieveAPIView):
+    """Returns the data for a specific post"""
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
 
 class CreatePost(CreateAPIView):
+    """Create new post"""
     permission_classes = (IsAuthenticated, )
     serializer_class = CreatePostSerializer
     queryset = Post.objects.all()
+
+
+class PostComment(CreateAPIView):
+    """Comments for a post"""
+    serializer_class = CommentSerializer
+    queryset = Comment.objects.all()
+

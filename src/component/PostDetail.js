@@ -1,7 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Context } from "../ContextApi";
-import { useHistory } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import Loading from './Loading';
 import axios from "axios";
 import Comment from './Comment';
 
@@ -24,24 +22,20 @@ export default function PostDetail({ match }) {
       .get(commentsUrl)
       .then((response) => {
         setComments(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
-      setLoading(false);
   };
 
   useEffect(() => {
     fetchData();
-    console.log("effect called");
   }, []);
 
-  const context = useContext(Context);
-
-  if(loading) {
-      return <div>Loading</div>
-  }
   return (
+    loading? <Loading />
+    :
     <>
     {/* Post Image */}
       <div className="row my-3 justify-content-center">

@@ -17,7 +17,7 @@ export default function Login() {
             <h4>Login to your account</h4>
         </div>
         <div className="col-12">
-          <p className="lead text-danger pt-2" id='login-error'></p>
+          <p className="lead text-danger font-weight-bold pt-2" id='login-error'></p>
         </div>
       <div className="col-md-6 m-auto">
         <form onSubmit={(event) => context.login(event, data)}>
