@@ -2,7 +2,7 @@
 
 ## Deployed on Heroku
 
-The full app is deployed on Heroku. Please click the link [View App Live On Heroku](https://example-blog-grayspace-djreact.herokuapp.com/) check out live.
+The full app is deployed on Heroku. Please click the link [View App Live On Heroku](https://example-blog-grayspace-djreact.herokuapp.com/) to check out live.
 
 ## Running
 
@@ -15,8 +15,8 @@ $ source venv/Scripts/activate  # On Windows
 $ pip install -r requirements.txt
 $ npm install
 $ python manage.py migrate
-$ python manaage.py runserver  #Django Server
-$ npm start                    # React Server
+$ python manage.py runserver  # Django Server
+$ npm start                   # React Server
 ```
 
 Then visit `http://localhost:3000` to view the full app.
