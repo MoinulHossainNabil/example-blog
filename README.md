@@ -2,9 +2,7 @@
 
 ## Deployed on Heroku
 
-The full app is deployed on Heroku. Please click the link below to check out live.
-
-[View App Live On Heroku](https://example-blog-grayspace-djreact.herokuapp.com/)
+The full app is deployed on Heroku. Please click the link [View App Live On Heroku](https://example-blog-grayspace-djreact.herokuapp.com/) check out live.
 
 ## Running
 
@@ -27,7 +25,7 @@ You can also run the the app on `http://localhost:8000`. But you will only find 
 
 On the other hands, on `http://localhost:3000` the full app can viewed with the integration of Django Rest Framework and Reactjs where you will find the features listed below:
 
-#App Features
+# App Features
 
 + Dynamic Rendering of [JSONPlaceholder](https://jsonplaceholder.typicode.com/) posts with details and comments by Api calls using axios
 + Posts rendered from django app "posts" created by authenticated users
@@ -39,5 +37,5 @@ On the other hands, on `http://localhost:3000` the full app can viewed with the 
 
 ## Branches
 + There are two branches. In the main branch, the code is developed where both the django and react server have to be run separately and the full app can be observed on react server `http://localhost:3000`.
-+ In the heroku branch, the code is prepared with necessary build and configurations in order to deploy the app on heroku. Here the code is integrated and the whole app can be run on just Django server `http://localhost:3000` alone.
++ In the heroku branch, the code is prepared with necessary build and configurations in order to deploy the app on heroku. Here the code is integrated and the whole app can be run on just Django server `http://localhost:8000` alone.
 
