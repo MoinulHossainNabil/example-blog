@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import Comment from './Comment';
 
-export default function UserPostDetails({match, history}) {
+export default function UserPostDetails({match}) {
     const [post, setPost] = useState([]);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,12 +15,11 @@ export default function UserPostDetails({match, history}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let localhost = "http://localhost:8000";
     let createUrl = "/api/post_comment/"
     let postData = {...data};
     let commentData = {...postData};
     postData['post'] = parseInt(match.params.id);
-    axios.post(localhost + createUrl, postData)
+    axios.post(createUrl, postData)
     .then(response => {
       let newCommentData = [commentData, ...comments];
       setComments(newCommentData);
@@ -39,17 +38,16 @@ export default function UserPostDetails({match, history}) {
   };
 
     const fetchData = () => {
-        let localhost = "http://localhost:8000";
         let postUrl = `/api/get_single_post/${match.params.id}/`
         let commentUrl = `/api/get_post_comments/${match.params.id}/`;
-        axios.get(localhost + postUrl)
+        axios.get(postUrl)
         .then(response => {
             setPost(response.data);
         })
         .catch(error => {
             console.log(error);
         })
-        axios.get(localhost + commentUrl)
+        axios.get(commentUrl)
         .then(response => {
             setComments(response.data);
         })

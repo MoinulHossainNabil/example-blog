@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from posts.views import posts
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +27,7 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('api/', include('rest_api.urls')),
     path('rest_api/', include('rest_framework.urls')),
-    path('', posts),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('django_post/', posts),
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns +=  [re_path('.*', TemplateView.as_view(template_name='index.html'))]

@@ -15,7 +15,6 @@ class ContextApi extends Component {
              message: "",
              loading: true
         }
-        this.localhost = "http://localhost:8000";
     }
 
     componentDidMount() {
@@ -49,7 +48,7 @@ class ContextApi extends Component {
     handleLogin = (event, data) => {
         event.preventDefault();
         let messageHideFunction = this.hideMessage;
-        axios.post(this.localhost + '/api/login/', data)
+        axios.post('/api/login/', data)
         .then(response => {
             this.setState({
                 isUserLoggedIn: true,
@@ -86,7 +85,7 @@ class ContextApi extends Component {
     handleRegister = (event, data, history) => {
         event.preventDefault()
         let messageHideFunction = this.hideMessage;
-        axios.post(this.localhost + '/api/register/', data)
+        axios.post('/api/register/', data)
         .then(response => {
             return response;
         })

@@ -28,6 +28,11 @@ const Home = () => {
   }
   return (
     <>
+      <div className="row my-4">
+        <div className="col-12">
+          <h4>Posts Retrieved Through Jsonholder Api</h4>
+        </div>
+      </div>
       <Pagination
         firstPostofCurrentPage={firstPostofCurrentPage}
         lastPostofCurrentPage={lastPostofCurrentPage}

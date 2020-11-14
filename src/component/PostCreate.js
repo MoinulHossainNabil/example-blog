@@ -15,7 +15,6 @@ export default function PostCreate({history}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let localhost = "http://localhost:8000";
         let createUrl = "/api/create_post/"
         let token = context.token;
         let user_id = context.user;
@@ -27,7 +26,7 @@ export default function PostCreate({history}) {
               Authorization: `Bearer ${token}`,
             },
           };
-        axios.post(localhost + createUrl, postData, config)
+        axios.post(createUrl, postData, config)
         .then(response => {
             history.push(`/user_posts/${response.data['id']}`);
         })

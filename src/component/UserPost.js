@@ -24,10 +24,9 @@ export default function UserPost() {
   };
 
   const fetchPost = () => {
-    let localhost = "http://localhost:8000";
     let endpoint = "/api/get_posts/";
     axios
-      .get(localhost + endpoint)
+      .get(endpoint)
       .then((response) => {
         setPost(response.data);
         setLoading(false);
@@ -46,6 +45,11 @@ export default function UserPost() {
   }
   return (
     <>
+      <div className="row my-4">
+        <div className="col-12">
+          <h4>Posts From Djagno App</h4>
+        </div>
+      </div>
       <Pagination
         firstPostofCurrentPage={firstPostofCurrentPage}
         lastPostofCurrentPage={lastPostofCurrentPage}
