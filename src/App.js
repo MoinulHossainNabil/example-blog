@@ -11,6 +11,7 @@ import PostDetails from "./component/PostDetail";
 import UserPost from "./component/UserPost";
 import UserPostDetails from './component/UserPostDetails';
 import PostCreate from './component/PostCreate';
+import Error from './component/Error';
 
 import { useContext } from "react";
 
@@ -74,6 +75,7 @@ function App() {
             path="/create_post"
             render={(props) => <PostCreate {...props} />}
           />
+          <Route render={(props) => <Error {...props} />} />
         </Switch>
       </div>
     </div>

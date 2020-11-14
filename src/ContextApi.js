@@ -30,7 +30,7 @@ class ContextApi extends Component {
         axios.get(url)
         .then(response => {
             this.setState({
-                posts: response.data.slice(0, 50),
+                posts: response.data,
                 loading: false
             })
         })

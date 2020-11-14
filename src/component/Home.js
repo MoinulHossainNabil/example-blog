@@ -9,7 +9,7 @@ const Home = () => {
   const posts = context.posts.map((post) => {
     return <Post post={post} endpoint="/post/" key={post.id} />;
   });
-  const postPerPage = 4;
+  const postPerPage = 10;
   const numberofPosts = posts.length;
   const [firstPostofCurrentPage, setFirstPost] = useState(parseInt(0));
   const [lastPostofCurrentPage, setLastPost] = useState(parseInt(postPerPage));
