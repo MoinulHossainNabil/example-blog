@@ -36,7 +36,7 @@ export default function Register({history}) {
                 onChange={(event) => setData({...data, first_name: event.target.value})}
                 required
                 autoFocus={true}
-                data-validation-required-message="Please enter your email."
+                data-validation-required-message="Please enter your first name."
               />
               <p className="help-block"></p>
             </div>
@@ -52,7 +52,7 @@ export default function Register({history}) {
                 id="last_name"
                 onChange={(event) => setData({...data, last_name: event.target.value})}
                 required
-                data-validation-required-message="Please enter your email."
+                data-validation-required-message="Please enter your last name."
               />
               <p className="help-block"></p>
             </div>
@@ -84,7 +84,7 @@ export default function Register({history}) {
                 id="password1"
                 onChange={(event) => setData({...data, password1: event.target.value})}
                 required
-                data-validation-required-message="Please enter your email."
+                data-validation-required-message="Please enter password."
               />
               <p className="help-block"></p>
             </div>
@@ -100,7 +100,7 @@ export default function Register({history}) {
                 id="password2"
                 onChange={(event) => setData({...data, password2: event.target.value})}
                 required
-                data-validation-required-message="Please enter your email."
+                data-validation-required-message="Please confirm password."
               />
               <p className="help-block"></p>
             </div>

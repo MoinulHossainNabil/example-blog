@@ -51,12 +51,14 @@ class ContextApi extends Component {
         let messageHideFunction = this.hideMessage;
         axios.post(this.localhost + '/api/login/', data)
         .then(response => {
+            // Update user status on successful login
             this.setState({
                 isUserLoggedIn: true,
                 token: response.data['access'],
                 user: response.data['user'],
                 message: response.data['response']
             })
+            // Stores the access token and user instance to localstorage on successful login
             localStorage.setItem('token', response.data['access']);
             localStorage.setItem('user', response.data['user']);
             setTimeout(messageHideFunction, 3000);
@@ -72,6 +74,7 @@ class ContextApi extends Component {
     
     handleLogout = () => {
         let messageHideFunction = this.hideMessage;
+        // Remove the access token from localstorage on logout
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         this.setState({
@@ -91,6 +94,7 @@ class ContextApi extends Component {
             return response;
         })
         .then(data => {
+            // Handling registration fails and success status
             if(data.status.toString() === "203") {
                 document.getElementById("register-error").innerHTML = data.data['response'];
             }

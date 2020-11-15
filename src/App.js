@@ -12,6 +12,7 @@ import UserPost from "./component/UserPost";
 import UserPostDetails from './component/UserPostDetails';
 import PostCreate from './component/PostCreate';
 import Error from './component/Error';
+import Message from './component/Message';
 
 import { useContext } from "react";
 
@@ -21,35 +22,14 @@ function App() {
     <div className="App">
       <Navbar />
 
+      {/* Showing Messages */}
       {context.message !== "" ? (
-        <div className="container">
-          <div className="mt-3 pt-2" id="message-div">
-            <div
-              className="alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <strong>{context.message}</strong>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span
-                  id="message-close"
-                  aria-hidden="true"
-                  onClick={() => context.hideMessage()}
-                >
-                  &times;
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <Message message={context.message} hideMessage={context.hideMessage} />
       ) : (
         ""
       )}
 
+      {/* All routes */}
       <div className="container">
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />

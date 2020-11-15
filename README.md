@@ -23,7 +23,7 @@ $ npm start                    # React Server
 
 Then visit `http://localhost:3000` to view the full app.
 
-You can also run the the app on `http://localhost:8000`. But you will only find Login and Registration functionality based on Django Views. 
+You can also run the the app on `http://localhost:8000`. But you will only find Login and Registration functionality based on Django Views including Jsonholder post and details.
 
 On the other hands, on `http://localhost:3000` the full app can viewed with the integration of Django Rest Framework and Reactjs where you will find the features listed below:
 

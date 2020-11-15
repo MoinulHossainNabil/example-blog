@@ -49,7 +49,7 @@ export default function Login() {
                 id="password"
                 onChange={(event) => setData({...data, password: event.target.value})}
                 required
-                data-validation-required-message="Please enter your email."
+                data-validation-required-message="Please enter your password."
               />
               <p className="help-block"></p>
             </div>
